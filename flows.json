@@ -1,0 +1,1247 @@
+[
+    {
+        "id": "50847231f337aaee",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5b80565ebef947fc",
+        "type": "comment",
+        "z": "50847231f337aaee",
+        "name": "Create Alias",
+        "info": "",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "a5998ac11655d817",
+        "type": "inject",
+        "z": "50847231f337aaee",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"country\":\"UA\",\"recipientLastName\":\"Natalich\",\"recipientMiddleName\":\"D\",\"city\":\"Lviv\",\"address2\":\"Region 1\",\"recipientFirstName\":\"Denys\",\"recipientPrimaryAccountNumber\":\"12345678910112\",\"address1\":\"Street 1\",\"issuerName\":\"Test Bank 1\",\"postalCode\":\"43010\",\"cardType\":\"Visa Classic\",\"consentDateTime\":\"2018-03-01 01:02:03\",\"aliasType\":\"01\",\"guid\":\"574f4b6a4c2b70472f306f300099515a789092348832455975343637a4d7001\",\"alias\":\"380959251022\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "af6fc547c541dcb2"
+            ]
+        ]
+    },
+    {
+        "id": "af6fc547c541dcb2",
+        "type": "http request",
+        "z": "50847231f337aaee",
+        "name": "Create alias",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://sandbox.api.visa.com/visaaliasdirectory/v1/manage/createalias",
+        "tls": "d1cc9e1b3305b4b5",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 310,
+        "y": 100,
+        "wires": [
+            [
+                "cd32e441e04ea870"
+            ]
+        ]
+    },
+    {
+        "id": "f5d401fb1c3b0b2b",
+        "type": "comment",
+        "z": "50847231f337aaee",
+        "name": "Delete Alias",
+        "info": "",
+        "x": 130,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "0305d529133e507f",
+        "type": "inject",
+        "z": "50847231f337aaee",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"guid\":\"574f4b6a4c2b70472f306f300099515a789092348832455975343637a4d7001\",\"alias\":\"380959251022\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "1b8ff6ed1ded72ab"
+            ]
+        ]
+    },
+    {
+        "id": "1b8ff6ed1ded72ab",
+        "type": "http request",
+        "z": "50847231f337aaee",
+        "name": "delete alias",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://sandbox.api.visa.com/visaaliasdirectory/v1/manage/deletealias",
+        "tls": "d1cc9e1b3305b4b5",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 260,
+        "wires": [
+            [
+                "21560925056d88a4"
+            ]
+        ]
+    },
+    {
+        "id": "21560925056d88a4",
+        "type": "debug",
+        "z": "50847231f337aaee",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "cd32e441e04ea870",
+        "type": "json",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 510,
+        "y": 100,
+        "wires": [
+            [
+                "c5564b25dcbc4570"
+            ]
+        ]
+    },
+    {
+        "id": "1e60a2d9bb468a09",
+        "type": "debug",
+        "z": "50847231f337aaee",
+        "name": "output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c5564b25dcbc4570",
+        "type": "switch",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload.guid",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 100,
+        "wires": [
+            [
+                "71db92923afb7397"
+            ],
+            [
+                "8b9bb966581cc7f5"
+            ]
+        ]
+    },
+    {
+        "id": "71db92923afb7397",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "Create successful",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Alias created successful",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 60,
+        "wires": [
+            [
+                "1e60a2d9bb468a09"
+            ]
+        ]
+    },
+    {
+        "id": "8b9bb966581cc7f5",
+        "type": "function",
+        "z": "50847231f337aaee",
+        "name": "Alias wasn`t create",
+        "func": "var text = \"Alias wasn`t create\";\nmsg.payload = text + \": \" + msg.payload.message;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 140,
+        "wires": [
+            [
+                "1e60a2d9bb468a09"
+            ]
+        ]
+    },
+    {
+        "id": "f44e03bbd2bfbfb5",
+        "type": "comment",
+        "z": "50847231f337aaee",
+        "name": "Create transaction",
+        "info": "",
+        "x": 150,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f1a6402a6852e453",
+        "type": "inject",
+        "z": "50847231f337aaee",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"businessApplicationId\":\"PP\",\"alias\":\"380959251022\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "c758cba08a251b96"
+            ]
+        ]
+    },
+    {
+        "id": "c758cba08a251b96",
+        "type": "http request",
+        "z": "50847231f337aaee",
+        "name": "resolve alias",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://sandbox.api.visa.com/visaaliasdirectory/v2/resolve",
+        "tls": "d1cc9e1b3305b4b5",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 310,
+        "y": 540,
+        "wires": [
+            [
+                "a8673a837a05fdb1"
+            ]
+        ]
+    },
+    {
+        "id": "04025ccd7dae0193",
+        "type": "debug",
+        "z": "50847231f337aaee",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "a8673a837a05fdb1",
+        "type": "switch",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 540,
+        "wires": [
+            [
+                "913bed2e326de8ec"
+            ],
+            [
+                "e6dc845286d0524f"
+            ]
+        ]
+    },
+    {
+        "id": "913bed2e326de8ec",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "Alias doesn`t exist",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Phone alias doesn`t exist",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 690,
+        "y": 440,
+        "wires": [
+            [
+                "04025ccd7dae0193"
+            ]
+        ]
+    },
+    {
+        "id": "46999324bda182d1",
+        "type": "http request",
+        "z": "50847231f337aaee",
+        "name": "Card validation",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://sandbox.api.visa.com/pav/v1/cardvalidation",
+        "tls": "d1cc9e1b3305b4b5",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 920,
+        "y": 600,
+        "wires": [
+            [
+                "23639adad9ea3b6d"
+            ]
+        ]
+    },
+    {
+        "id": "e6dc845286d0524f",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"systemsTraceAuditNumber\":\"123456\",\"cardCvv2Value\":\"012\",\"cardAcceptor\":{\"address\":{\"country\":\"UA\",\"zipCode\":\"43010\",\"city\":\"Lviv\",\"state\":\"CA\"},\"idCode\":\"111111\",\"terminalId\":\"12345678\"},\"primaryAccountNumber\":\"12345678910112\",\"retrievalReferenceNumber\":\"015221743720\",\"cardExpiryDate\":\"2040-10\",\"addressVerificationResults\":{\"street\":\"Street 1\",\"postalCode\":\"43010\"}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 600,
+        "wires": [
+            [
+                "46999324bda182d1"
+            ]
+        ]
+    },
+    {
+        "id": "8c87740c70cad4f7",
+        "type": "switch",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1330,
+        "y": 600,
+        "wires": [
+            [
+                "0a7ed407073ce138"
+            ],
+            [
+                "64509f5c90da571b"
+            ]
+        ]
+    },
+    {
+        "id": "0a7ed407073ce138",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "Card validation was unsuccessful",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Card validation was unsuccessful",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1640,
+        "y": 520,
+        "wires": [
+            [
+                "45f305cdf228229d"
+            ]
+        ]
+    },
+    {
+        "id": "3ffc8723264808d9",
+        "type": "http request",
+        "z": "50847231f337aaee",
+        "name": "Pull funds",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pullfundstransactions",
+        "tls": "d1cc9e1b3305b4b5",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 1820,
+        "y": 680,
+        "wires": [
+            [
+                "43cae82e23bc2981"
+            ]
+        ]
+    },
+    {
+        "id": "ab9018db78a45ae8",
+        "type": "http request",
+        "z": "50847231f337aaee",
+        "name": "Push funds",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pushfundstransactions",
+        "tls": "d1cc9e1b3305b4b5",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 2550,
+        "y": 760,
+        "wires": [
+            [
+                "8ebb4270655f56cd"
+            ]
+        ]
+    },
+    {
+        "id": "f244e1ce63f6a724",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"amount\":\"124.05\",\"senderAddress\":\"16 Lvivska\",\"localTransactionDateTime\":\"2023-01-22T12:56:43\",\"pointOfServiceData\":{\"panEntryMode\":\"90\",\"posConditionCode\":\"00\",\"motoECIIndicator\":\"0\"},\"recipientPrimaryAccountNumber\":\"4060320000000127\",\"colombiaNationalServiceData\":{\"addValueTaxReturn\":\"10.00\",\"taxAmountConsumption\":\"10.00\",\"nationalNetReimbursementFeeBaseAmount\":\"20.00\",\"addValueTaxAmount\":\"10.00\",\"nationalNetMiscAmount\":\"10.00\",\"countryCodeNationalService\":\"170\",\"nationalChargebackReason\":\"11\",\"emvTransactionIndicator\":\"1\",\"nationalNetMiscAmountType\":\"A\",\"costTransactionIndicator\":\"0\",\"nationalReimbursementFee\":\"20.00\"},\"cardAcceptor\":{\"address\":{\"country\":\"Ukraine\"},\"idCode\":\"CA-IDCode-77765\",\"name\":\"Visa Inc. Ukraine-Lviv\",\"terminalId\":\"TID-9999\"},\"senderReference\":\"\",\"transactionIdentifier\":\"883916196354773\",\"acquirerCountryCode\":\"840\",\"acquiringBin\":\"408999\",\"retrievalReferenceNumber\":\"412770452025\",\"senderCity\":\"Lviv\",\"senderStateCode\":\"CA\",\"systemsTraceAuditNumber\":\"451018\",\"senderName\":\"Mohammed Qasim\",\"businessApplicationId\":\"AA\",\"settlementServiceIndicator\":\"9\",\"merchantCategoryCode\":\"6012\",\"transactionCurrencyCode\":\"USD\",\"recipientName\":\"rohan\",\"senderCountryCode\":\"124\",\"sourceOfFundsCode\":\"05\",\"senderAccountNumber\":\"4060320000000126\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2300,
+        "y": 760,
+        "wires": [
+            [
+                "ab9018db78a45ae8"
+            ]
+        ]
+    },
+    {
+        "id": "ad4379ad8587cf36",
+        "type": "http request",
+        "z": "50847231f337aaee",
+        "name": "Reverse fund",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/reversefundstransactions",
+        "tls": "d1cc9e1b3305b4b5",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 3190,
+        "y": 820,
+        "wires": [
+            [
+                "48f944ad8555ddfb"
+            ]
+        ]
+    },
+    {
+        "id": "b5c6f3d3be5b0103",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"amount\":\"24.01\",\"localTransactionDateTime\":\"2023-01-22T12:56:43\",\"pointOfServiceData\":{\"panEntryMode\":\"90\",\"posConditionCode\":\"00\",\"motoECIIndicator\":\"0\"},\"pointOfServiceCapability\":{\"posTerminalType\":\"4\",\"posTerminalEntryCapability\":\"2\"},\"colombiaNationalServiceData\":{\"addValueTaxReturn\":\"10.00\",\"taxAmountConsumption\":\"10.00\",\"nationalNetReimbursementFeeBaseAmount\":\"20.00\",\"addValueTaxAmount\":\"10.00\",\"nationalNetMiscAmount\":\"10.00\",\"countryCodeNationalService\":\"170\",\"nationalChargebackReason\":\"11\",\"emvTransactionIndicator\":\"1\",\"nationalNetMiscAmountType\":\"A\",\"costTransactionIndicator\":\"0\",\"nationalReimbursementFee\":\"20.00\"},\"cardAcceptor\":{\"address\":{\"country\":\"Ukraine\"},\"idCode\":\"VMT200911026070\",\"name\":\"Visa Inc. Ukraine-Lviv\",\"terminalId\":\"365539\"},\"transactionIdentifier\":\"381228649430011\",\"acquirerCountryCode\":\"380\",\"acquiringBin\":\"408999\",\"senderCurrencyCode\":\"USD\",\"retrievalReferenceNumber\":\"330000550000\",\"systemsTraceAuditNumber\":\"451050\",\"businessApplicationId\":\"AA\",\"senderPrimaryAccountNumber\":\"4895100000055127\",\"settlementServiceIndicator\":\"9\",\"senderCardExpiryDate\":\"2024-10\",\"originalDataElements\":{\"transmissionDateTime\":\"2023-01-22T12:56:43\",\"systemsTraceAuditNumber\":\"897825\",\"approvalCode\":\"20304B\",\"acquiringBin\":\"408999\"}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2960,
+        "y": 820,
+        "wires": [
+            [
+                "ad4379ad8587cf36"
+            ]
+        ]
+    },
+    {
+        "id": "48f944ad8555ddfb",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "Reverse funds transaction was successful",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Reverse funds transaction was successful",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3500,
+        "y": 820,
+        "wires": [
+            [
+                "047df976a4909910"
+            ]
+        ]
+    },
+    {
+        "id": "64509f5c90da571b",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"surcharge\":\"11.99\",\"amount\":\"124.02\",\"localTransactionDateTime\":\"2023-01-22T12:56:43\",\"cpsAuthorizationCharacteristicsIndicator\":\"Y\",\"riskAssessmentData\":{\"traExemptionIndicator\":true,\"trustedMerchantExemptionIndicator\":true,\"scpExemptionIndicator\":true,\"delegatedAuthenticationIndicator\":true,\"lowValueExemptionIndicator\":true},\"colombiaNationalServiceData\":{\"addValueTaxReturn\":\"10.00\",\"taxAmountConsumption\":\"10.00\",\"nationalNetReimbursementFeeBaseAmount\":\"20.00\",\"addValueTaxAmount\":\"10.00\",\"nationalNetMiscAmount\":\"10.00\",\"countryCodeNationalService\":\"170\",\"nationalChargebackReason\":\"11\",\"emvTransactionIndicator\":\"1\",\"nationalNetMiscAmountType\":\"A\",\"costTransactionIndicator\":\"0\",\"nationalReimbursementFee\":\"20.00\"},\"cardAcceptor\":{\"address\":{\"country\":\"Ukraine\"},\"idCode\":\"ABCD1234ABCD123\",\"name\":\"Visa Inc. Ukraine-Lviv\",\"terminalId\":\"ABCD1234\"},\"acquirerCountryCode\":\"840\",\"acquiringBin\":\"408999\",\"senderCurrencyCode\":\"USD\",\"retrievalReferenceNumber\":\"330000560021\",\"addressVerificationData\":{\"street\":\"XYZ St\",\"postalCode\":\"12345\"},\"cavv\":\"0700100038238906000013405823891061668252\",\"systemsTraceAuditNumber\":\"452011\",\"businessApplicationId\":\"AA\",\"senderPrimaryAccountNumber\":\"4060320000000127\",\"settlementServiceIndicator\":\"9\",\"visaMerchantIdentifier\":\"73625198\",\"foreignExchangeFeeTransaction\":\"11.99\",\"senderCardExpiryDate\":\"2023-10\",\"nationalReimbursementFee\":\"11.22\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1580,
+        "y": 680,
+        "wires": [
+            [
+                "3ffc8723264808d9"
+            ]
+        ]
+    },
+    {
+        "id": "43cae82e23bc2981",
+        "type": "switch",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2050,
+        "y": 680,
+        "wires": [
+            [
+                "d37fb7ccac48b9ba"
+            ],
+            [
+                "f244e1ce63f6a724"
+            ]
+        ]
+    },
+    {
+        "id": "8ebb4270655f56cd",
+        "type": "switch",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2750,
+        "y": 760,
+        "wires": [
+            [
+                "939186ee2ef16a95"
+            ],
+            [
+                "b5c6f3d3be5b0103"
+            ]
+        ]
+    },
+    {
+        "id": "d37fb7ccac48b9ba",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "Pull funds transaction was unsuccessful",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Pull funds transaction was unsuccessful",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2380,
+        "y": 600,
+        "wires": [
+            [
+                "4d24b4afbcfef459"
+            ]
+        ]
+    },
+    {
+        "id": "939186ee2ef16a95",
+        "type": "change",
+        "z": "50847231f337aaee",
+        "name": "Funds transaction was unsuccessful",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Funds transaction was unsuccessful",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3030,
+        "y": 680,
+        "wires": [
+            [
+                "6a63894f66c5f50f"
+            ]
+        ]
+    },
+    {
+        "id": "23639adad9ea3b6d",
+        "type": "xml",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 1130,
+        "y": 600,
+        "wires": [
+            [
+                "8c87740c70cad4f7"
+            ]
+        ]
+    },
+    {
+        "id": "45f305cdf228229d",
+        "type": "debug",
+        "z": "50847231f337aaee",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1940,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "4d24b4afbcfef459",
+        "type": "debug",
+        "z": "50847231f337aaee",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2700,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "6a63894f66c5f50f",
+        "type": "debug",
+        "z": "50847231f337aaee",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3340,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "047df976a4909910",
+        "type": "debug",
+        "z": "50847231f337aaee",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3840,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "b10b4b4fdf1b6130",
+        "type": "comment",
+        "z": "50847231f337aaee",
+        "name": "Telegram-bot (create alias)",
+        "info": "",
+        "x": 150,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "62dd83bf021a53f7",
+        "type": "debug",
+        "z": "50847231f337aaee",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "58cb2f1b61c0c3f1",
+        "type": "telegram sender",
+        "z": "50847231f337aaee",
+        "name": "",
+        "bot": "d22c713434adc284",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1150,
+        "y": 800,
+        "wires": [
+            [
+                "62dd83bf021a53f7"
+            ]
+        ]
+    },
+    {
+        "id": "e988c6fa0afd18b5",
+        "type": "inject",
+        "z": "50847231f337aaee",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"country\":\"UA\",\"recipientLastName\":\"Natalich\",\"recipientMiddleName\":\"D\",\"city\":\"Lviv\",\"address2\":\"Region 1\",\"recipientFirstName\":\"Denys\",\"recipientPrimaryAccountNumber\":\"12345678910112\",\"address1\":\"Street 1\",\"issuerName\":\"Test Bank 1\",\"postalCode\":\"43010\",\"cardType\":\"Visa Classic\",\"consentDateTime\":\"2018-03-01 01:02:03\",\"aliasType\":\"01\",\"guid\":\"574f4b6a4c2b70472f306f300099515a789092348832455975343637a4d7001\",\"alias\":\"380959251022\"}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 800,
+        "wires": [
+            [
+                "4e0c6b301ce972b6"
+            ]
+        ]
+    },
+    {
+        "id": "4e0c6b301ce972b6",
+        "type": "http request",
+        "z": "50847231f337aaee",
+        "name": "Create alias",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://sandbox.api.visa.com/visaaliasdirectory/v1/manage/createalias",
+        "tls": "d1cc9e1b3305b4b5",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 290,
+        "y": 800,
+        "wires": [
+            [
+                "3ac6de1ee555fe07"
+            ]
+        ]
+    },
+    {
+        "id": "3ac6de1ee555fe07",
+        "type": "json",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 490,
+        "y": 800,
+        "wires": [
+            [
+                "eca413485024dd52"
+            ]
+        ]
+    },
+    {
+        "id": "5c37fe89971459bd",
+        "type": "function",
+        "z": "50847231f337aaee",
+        "name": "Create successful",
+        "func": "var text = \"Hey\\nYour guid: \" + msg.payload.guid\nmsg.payload = {\n    \"chatId\": 462322376,\n    \"type\": \"message\",\n    \"content\": text\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 740,
+        "wires": [
+            [
+                "58cb2f1b61c0c3f1"
+            ]
+        ]
+    },
+    {
+        "id": "d26525b9d9653f0a",
+        "type": "telegram receiver",
+        "z": "50847231f337aaee",
+        "name": "",
+        "bot": "d22c713434adc284",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 130,
+        "y": 1040,
+        "wires": [
+            [
+                "436fc78b967e8d52"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "dc189b843ab9b1fa",
+        "type": "debug",
+        "z": "50847231f337aaee",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "436fc78b967e8d52",
+        "type": "function",
+        "z": "50847231f337aaee",
+        "name": "function 1",
+        "func": "var number = msg.payload.content\nmsg.payload = {\n    \"businessApplicationId\": \"PP\",\n    \"alias\": number\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1040,
+        "wires": [
+            [
+                "6217b40946beba9c"
+            ]
+        ]
+    },
+    {
+        "id": "6217b40946beba9c",
+        "type": "http request",
+        "z": "50847231f337aaee",
+        "name": "resolve alias",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://sandbox.api.visa.com/visaaliasdirectory/v2/resolve",
+        "tls": "d1cc9e1b3305b4b5",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 1040,
+        "wires": [
+            [
+                "a9c64f39957788a7"
+            ]
+        ]
+    },
+    {
+        "id": "a9c64f39957788a7",
+        "type": "switch",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 790,
+        "y": 1040,
+        "wires": [
+            [
+                "56e92d99a77f7110"
+            ],
+            [
+                "cd04d69011c6ec7a"
+            ]
+        ]
+    },
+    {
+        "id": "56e92d99a77f7110",
+        "type": "function",
+        "z": "50847231f337aaee",
+        "name": "Phone alias doesn`t exist",
+        "func": "var text = \"Phone alias doesn`t exist\"\nmsg.payload = {\n    \"chatId\": 462322376,\n    \"type\": \"message\",\n    \"content\": text\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 980,
+        "wires": [
+            [
+                "0d88138ea6d4992c"
+            ]
+        ]
+    },
+    {
+        "id": "cd04d69011c6ec7a",
+        "type": "function",
+        "z": "50847231f337aaee",
+        "name": "Alias exists",
+        "func": "var text = \"Alias exists\"\nmsg.payload = {\n    \"chatId\": 462322376,\n    \"type\": \"message\",\n    \"content\": text\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 1080,
+        "wires": [
+            [
+                "0d88138ea6d4992c"
+            ]
+        ]
+    },
+    {
+        "id": "93ebab700c893fa3",
+        "type": "comment",
+        "z": "50847231f337aaee",
+        "name": "Telegram-bot (check if alias exists)",
+        "info": "just send to the bot number of alias",
+        "x": 180,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "0d88138ea6d4992c",
+        "type": "telegram sender",
+        "z": "50847231f337aaee",
+        "name": "",
+        "bot": "d22c713434adc284",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1330,
+        "y": 1040,
+        "wires": [
+            [
+                "dc189b843ab9b1fa"
+            ]
+        ]
+    },
+    {
+        "id": "eca413485024dd52",
+        "type": "switch",
+        "z": "50847231f337aaee",
+        "name": "",
+        "property": "payload.guid",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 650,
+        "y": 800,
+        "wires": [
+            [
+                "5c37fe89971459bd"
+            ],
+            [
+                "8f2a2c8a03ad75eb"
+            ]
+        ]
+    },
+    {
+        "id": "8f2a2c8a03ad75eb",
+        "type": "function",
+        "z": "50847231f337aaee",
+        "name": "Alias wasn`t create",
+        "func": "var text = \"Hey\\nYour alias wasn`t create\\nError: \" + msg.payload.message\nmsg.payload = {\n    \"chatId\": 462322376,\n    \"type\": \"message\",\n    \"content\": text\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 840,
+        "wires": [
+            [
+                "58cb2f1b61c0c3f1"
+            ]
+        ]
+    },
+    {
+        "id": "d1cc9e1b3305b4b5",
+        "type": "tls-config",
+        "name": "12345",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "cert.pem",
+        "keyname": "key_f2003711-4025-4b9f-be27-a614b3068d26.pem",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "d22c713434adc284",
+        "type": "telegram bot",
+        "botname": "TestBot42flows_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    }
+]
